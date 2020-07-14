@@ -7,29 +7,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class StudentService {
-    private StudentimpDao studentRepo;
 
-    public StudentService(StudentimpDao studentRepo) {
-        this.studentRepo = studentRepo;
-    }
+public interface StudentService {
 
-    public Student createStudent(Student student){
-         return  studentRepo.save(student);
-    }
-    public List<Student> getStudents(){
-        return studentRepo.findAll();
+    Student createStudent(Student student);
 
-    }
-    public Optional<Student> getStudentById(String id){
-        return  studentRepo.findById(id);
-    }
-    public Student updateStudent(String id,Student student){
-        return  studentRepo.save(student);
-    }
-    public void deleteStudent(String id){
-        studentRepo.deleteById(id);
-    }
+    List<Student> getStudents();
+
+    Optional<Student> getStudentById(String id);
+
+    Optional<Student> getStudentByFirstName(String name);
+
+    Student updateStudent(Student student);
+
+    void deleteStudent(String id);
+
 
 }
