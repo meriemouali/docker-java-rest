@@ -1,6 +1,5 @@
 package com.example.crud.controller;
 
-import com.example.crud.dto.CreateStudentDto;
 import com.example.crud.model.Student;
 import com.example.crud.service.StudentServiceImp;
 import org.springframework.web.bind.annotation.*;
