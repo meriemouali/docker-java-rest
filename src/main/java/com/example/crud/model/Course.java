@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Course {
     @Id
     private String id;
-    private String StudentId;
+    private String studentId;
     @NotNull
     @NotEmpty
     @NotBlank
@@ -25,7 +25,7 @@ public class Course {
 
     public Course(String id, String studentId, @NotNull @NotEmpty @NotBlank String title) {
         this.id = id;
-        StudentId = studentId;
+        this.studentId = studentId;
         this.title = title;
     }
 }

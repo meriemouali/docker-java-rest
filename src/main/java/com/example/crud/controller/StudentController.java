@@ -33,7 +33,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Student> getStudentById(@PathVariable("id") String id) {
+    public ResponseStudent getStudentById(@PathVariable("id") String id) {
         return service.getStudentById(id);
     }
 

@@ -16,7 +16,7 @@ public interface StudentService {
 
     List<Student> getStudents();
 
-    Optional<Student> getStudentById(String id);
+    ResponseStudent getStudentById(String id);
 
     Optional<Student> getStudentByFirstName(String name);
 

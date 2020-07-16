@@ -8,7 +8,6 @@ import com.example.crud.repository.StudentimpDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,25 +24,24 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public ResponseStudent createStudent(ResponseStudent studentCourse) {
-
         Student body = new Student();
         body.setId(studentCourse.getId());
         body.setFirstName(studentCourse.getFirstName());
         body.setLastName(studentCourse.getLastName());
         body.setBirthDay(studentCourse.getBirthDay());
         Student s = studentRepo.save(body);
-        List<Course> c = courseRepo.saveAll(studentCourse.getCourse());
-        ResponseStudent res = new ResponseStudent();
-        c.stream().map((item) -> { item.setStudentId(s.getId());
+        studentCourse.getCourse().stream().map((item) -> {
+            item.setStudentId(s.getId());
             return null;
         }).collect(Collectors.toList());
+        List<Course> c = courseRepo.saveAll(studentCourse.getCourse());
+        ResponseStudent res = new ResponseStudent();
         res.setCourse((List<Course>) c);
         res.setId(s.getId());
         res.setFirstName(s.getFirstName());
         res.setLastName(s.getLastName());
         res.setBirthDay(s.getBirthDay());
         return res;
-
 
     }
 
@@ -54,8 +52,17 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public Optional<Student> getStudentById(String id) {
-        return studentRepo.findById(id);
+    public ResponseStudent getStudentById(String id) {
+        Optional<Student> s = studentRepo.findById(id);
+        List<Course> c = courseRepo.findByStudentId(s.get().getId());
+        ResponseStudent res = new ResponseStudent();
+        res.setCourse(c);
+        res.setId(s.get().getId());
+        res.setFirstName(s.get().getFirstName());
+        res.setLastName(s.get().getLastName());
+        res.setBirthDay(s.get().getBirthDay());
+        return res;
+
     }
 
     @Override
