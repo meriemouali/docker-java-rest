@@ -1,44 +1,37 @@
 package com.example.crud.model;
 
+
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
-
+@Getter
+@Setter
 @Document(collection = "student")
 public class Student {
     @Id
     private String id;
-    @NotEmpty(message = "firstName shd not be empty")
-    @NotNull(message = "firstName shd not be empty")
-    @NotBlank(message = "firstName shd not be blank")
+
+    @NotNull(message = "firstName shd not be null")
+
     private String firstName;
     private String lastName;
+    private Date birthDay;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
+    public Student(String id, @NotNull(message = "firstName shd not be null") String firstName, String lastName, Date birthDay, List<Course> course) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.birthDay = birthDay;
+    }
+    public Student() {
+
     }
 }
+
+

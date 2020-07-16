@@ -1,5 +1,7 @@
 package com.example.crud.controller;
 
+import com.example.crud.dto.ResponseStudent;
+import com.example.crud.model.Course;
 import com.example.crud.model.Student;
 import com.example.crud.service.StudentServiceImp;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,9 @@ public class StudentController {
 
     @PostMapping("/")
 
-    public Student insertStudent(@RequestBody @Valid Student student) {
-        return service.createStudent(student);
+    public ResponseStudent insertStudent(@RequestBody @Valid ResponseStudent studentCourse) {
+
+        return service.createStudent(studentCourse);
 
     }
 

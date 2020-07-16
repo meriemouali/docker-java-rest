@@ -1,5 +1,7 @@
 package com.example.crud.service;
 
+import com.example.crud.dto.ResponseStudent;
+import com.example.crud.model.Course;
 import com.example.crud.model.Student;
 import com.example.crud.repository.StudentimpDao;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import java.util.Optional;
 
 public interface StudentService {
 
-    Student createStudent(Student student);
+    ResponseStudent createStudent(ResponseStudent studentResponse);
 
     List<Student> getStudents();
 
