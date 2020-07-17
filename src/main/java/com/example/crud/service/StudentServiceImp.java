@@ -71,9 +71,26 @@ public class StudentServiceImp implements StudentService {
         return student;
     }
 
+
     @Override
-    public Student updateStudent(Student student) {
-        studentRepo.save(student);
+    public ResponseStudent updateStudent(ResponseStudent student) {
+
+        Optional<Student> s = studentRepo.findById(student.getId());
+        s.get().setFirstName(student.getFirstName());
+        s.get().setLastName(student.getLastName());
+        s.get().setBirthDay(student.getBirthDay());
+        studentRepo.save(s.get());
+        List<Course> courses = courseRepo.findByStudentId(student.getId());
+        List<Course> MC = student.getCourse().stream().map((item) -> {
+            item.setStudentId(student.getId());
+            return item;
+        }).collect(Collectors.toList());
+
+
+        courseRepo.deleteAll(courses);
+        courseRepo.saveAll(MC);
+
+
         return student;
     }
 

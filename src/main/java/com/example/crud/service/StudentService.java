@@ -20,7 +20,7 @@ public interface StudentService {
 
     Optional<Student> getStudentByFirstName(String name);
 
-    Student updateStudent(Student student);
+    ResponseStudent updateStudent(ResponseStudent student);
 
     void deleteStudent(String id);
 
