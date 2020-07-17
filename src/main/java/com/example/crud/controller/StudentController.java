@@ -1,14 +1,11 @@
 package com.example.crud.controller;
 
 import com.example.crud.dto.ResponseStudent;
-import com.example.crud.model.Course;
-import com.example.crud.model.Student;
 import com.example.crud.service.StudentServiceImp;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
@@ -28,7 +25,7 @@ public class StudentController {
     }
 
     @GetMapping("/")
-    public List<Student> getStudents() {
+    public List<ResponseStudent> getStudents() {
         return service.getStudents();
     }
 

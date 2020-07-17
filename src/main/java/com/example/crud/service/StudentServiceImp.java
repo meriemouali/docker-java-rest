@@ -32,6 +32,7 @@ public class StudentServiceImp implements StudentService {
         Student s = studentRepo.save(body);
         studentCourse.getCourse().stream().map((item) -> {
             item.setStudentId(s.getId());
+
             return null;
         }).collect(Collectors.toList());
         List<Course> c = courseRepo.saveAll(studentCourse.getCourse());
@@ -46,9 +47,16 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public List<Student> getStudents() {
-        return studentRepo.findAll();
-
+    public List<ResponseStudent> getStudents() {
+       return studentRepo.findAll().stream().map((item) -> {
+           ResponseStudent resp =new ResponseStudent();
+            resp.setId(item.getId());
+            resp.setFirstName(item.getFirstName());
+            resp.setLastName(item.getLastName());
+            resp.setBirthDay(item.getBirthDay());
+            resp.setCourse(courseRepo.findByStudentId(item.getId()));
+            return resp;
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -65,11 +73,7 @@ public class StudentServiceImp implements StudentService {
 
     }
 
-    @Override
-    public Optional<Student> getStudentByFirstName(String name) {
-        Optional<Student> student = studentRepo.findByFirstName(name);
-        return student;
-    }
+
 
 
     @Override
