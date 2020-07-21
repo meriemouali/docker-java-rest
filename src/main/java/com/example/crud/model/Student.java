@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Student {
     private String id;
 
     @NotNull(message = "firstName shd not be null")
-
+@NotBlank
     private String firstName;
     private String lastName;
     private Date birthDay;

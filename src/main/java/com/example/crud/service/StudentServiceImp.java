@@ -1,5 +1,6 @@
 package com.example.crud.service;
 
+import com.example.crud.dto.ResponseDto;
 import com.example.crud.dto.ResponseStudent;
 import com.example.crud.model.Course;
 import com.example.crud.model.Student;
@@ -23,7 +24,7 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public ResponseStudent createStudent(ResponseStudent studentCourse) {
+    public ResponseDto createStudent(ResponseStudent studentCourse) {
         Student body = new Student();
         body.setId(studentCourse.getId());
         body.setFirstName(studentCourse.getFirstName());
@@ -42,13 +43,13 @@ public class StudentServiceImp implements StudentService {
         res.setFirstName(s.getFirstName());
         res.setLastName(s.getLastName());
         res.setBirthDay(s.getBirthDay());
-        return res;
+        return new ResponseDto(true, res, "Student created successfully");
 
     }
 
     @Override
-    public List<ResponseStudent> getStudents() {
-       return studentRepo.findAll().stream().map((item) -> {
+    public ResponseDto getStudents() {
+       return new ResponseDto(true,studentRepo.findAll().stream().map((item) -> {
            ResponseStudent resp =new ResponseStudent();
             resp.setId(item.getId());
             resp.setFirstName(item.getFirstName());
@@ -56,11 +57,11 @@ public class StudentServiceImp implements StudentService {
             resp.setBirthDay(item.getBirthDay());
             resp.setCourse(courseRepo.findByStudentId(item.getId()));
             return resp;
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList()),"list of students");
     }
 
     @Override
-    public ResponseStudent getStudentById(String id) {
+    public ResponseDto getStudentById(String id) {
         Optional<Student> s = studentRepo.findById(id);
         List<Course> c = courseRepo.findByStudentId(s.get().getId());
         ResponseStudent res = new ResponseStudent();
@@ -69,7 +70,7 @@ public class StudentServiceImp implements StudentService {
         res.setFirstName(s.get().getFirstName());
         res.setLastName(s.get().getLastName());
         res.setBirthDay(s.get().getBirthDay());
-        return res;
+        return new ResponseDto(true,res,"student By Id");
 
     }
 
@@ -77,7 +78,7 @@ public class StudentServiceImp implements StudentService {
 
 
     @Override
-    public ResponseStudent updateStudent(ResponseStudent student) {
+    public ResponseDto updateStudent(ResponseStudent student) {
 
         Optional<Student> s = studentRepo.findById(student.getId());
         s.get().setFirstName(student.getFirstName());
@@ -95,12 +96,13 @@ public class StudentServiceImp implements StudentService {
         courseRepo.saveAll(MC);
 
 
-        return student;
+        return  new ResponseDto(true,student,"student updated successufully");
     }
 
     @Override
-    public void deleteStudent(String id) {
+    public ResponseDto deleteStudent(String id) {
         studentRepo.deleteById(id);
+        return new ResponseDto(true,"failed to delete");
     }
 
 }

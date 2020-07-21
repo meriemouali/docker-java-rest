@@ -1,5 +1,6 @@
 package com.example.crud.service;
 
+import com.example.crud.dto.ResponseDto;
 import com.example.crud.dto.ResponseStudent;
 
 import java.util.List;
@@ -7,16 +8,16 @@ import java.util.List;
 
 public interface StudentService {
 
-    ResponseStudent createStudent(ResponseStudent studentResponse);
+    ResponseDto createStudent(ResponseStudent studentResponse);
 
-    List<ResponseStudent> getStudents();
+    ResponseDto getStudents();
 
-    ResponseStudent getStudentById(String id);
+    ResponseDto getStudentById(String id);
 
 
-    ResponseStudent updateStudent(ResponseStudent student);
+    ResponseDto updateStudent(ResponseStudent student);
 
-    void deleteStudent(String id);
+    ResponseDto deleteStudent(String id);
 
 
 }
