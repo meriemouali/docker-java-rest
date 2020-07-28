@@ -1,10 +1,10 @@
 package com.example.crud.dto;
 
-import com.example.crud.model.Course;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 
 import javax.validation.constraints.NotBlank;
@@ -23,6 +23,8 @@ public class ResponseStudent {
     private String firstName;
     private String lastName;
     private Date birthDay;
-    private List<Course> course;
+    @NotNull
+    @UniqueElements
+    private List<String> course;
 
 }

@@ -18,17 +18,17 @@ public class StudentController {
     }
     private StudentServiceImp service;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ResponseDto> insertStudent(@RequestBody @Valid ResponseStudent studentCourse) {
         return new ResponseEntity<>(service.createStudent(studentCourse), HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<ResponseDto> updateStudent(@RequestBody ResponseStudent student) {
         return new ResponseEntity<>(service.updateStudent(student), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<ResponseDto> getStudents() {
         return new ResponseEntity<>(service.getStudents(), HttpStatus.OK);
     }

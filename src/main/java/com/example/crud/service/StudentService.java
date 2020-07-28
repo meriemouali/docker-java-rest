@@ -19,5 +19,4 @@ public interface StudentService {
 
     ResponseDto deleteStudent(String id);
 
-
 }
